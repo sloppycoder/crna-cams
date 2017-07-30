@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Li Lin",
+    "notes": "this is a good guy",
+    "phone": "8005551212"
+  },
+  {
+    "id": 2,
+    "name": "John Doe",
+    "notes": "no idea who this guy is",
+    "phone": "123123123"
+  }
+]

@@ -35,9 +35,7 @@ export default class App extends React.Component {
         //   require('./assets/images/robot-dev.png'),
         //   require('./assets/images/robot-prod.png'),
         // ]),
-        Font.loadAsync([
-          Ionicons.font,
-        ]),
+        Font.loadAsync([Ionicons.font]),
       ]);
     } catch (e) {
       // In this case, you might want to report the error to your error

@@ -1,14 +1,19 @@
-import { Notifications } from 'expo';
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
+import AccountListScreen from '../screens/AccountListScreen';
+import AccountListMapViewScreen from '../screens/AccountListMapViewScreen';
+import AccountDetailScreen from '../screens/AccountDetailScreen';
 
 const RootStackNavigator = StackNavigator(
   {
-    Main: {
+    main: {
       screen: MainTabNavigator,
     },
+    accountList: { screen: AccountListScreen },
+    accountListMap: { screen: AccountListMapViewScreen },
+    accountDetail: { screen: AccountDetailScreen },
   },
   {
     navigationOptions: () => ({
@@ -33,12 +38,7 @@ export default class RootNavigator extends React.Component {
   }
 
   _registerForPushNotifications() {
-    // registerForPushNotificationsAsync();
-
     // Watch for incoming notifications
-    this._notificationSubscription = Notifications.addListener(
-      this._handleNotification
-    );
   }
 
   _handleNotification = ({ origin, data }) => {
