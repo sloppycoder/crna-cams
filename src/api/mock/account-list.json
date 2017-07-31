@@ -3,12 +3,20 @@
     "id": 1,
     "name": "Li Lin",
     "notes": "this is a good guy",
-    "phone": "8005551212"
+    "phone": "8005551212",
+    "coord": {
+      "latitude": 37.785718,
+      "longitude": -122.401051
+    }
   },
   {
     "id": 2,
     "name": "John Doe",
     "notes": "no idea who this guy is",
-    "phone": "123123123"
+    "phone": "123123123",
+    "coord": {
+      "latitude": 37.807413,
+      "longitude": -122.430445
+    }
   }
 ]
