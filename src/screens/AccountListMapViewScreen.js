@@ -13,7 +13,7 @@ _defaultMapRegion = () => {
     latitude: LATITUDE,
     longitude: LONGITUDE,
     latitudeDelta: LATITUDE_DELTA,
-    longitudeDelta: LONGITUDE_DELTA,
+    longitudeDelta: LONGITUDE_DELTA
   };
 };
 
@@ -22,7 +22,7 @@ _getMarkersFromAccountList = accountList =>
     return {
       title: e.name,
       id: e.id,
-      latlng: e.coord,
+      latlng: e.coord
     };
   });
 
@@ -37,15 +37,22 @@ export default class AccountListMapViewScreen extends React.Component {
             navigation.goBack(null);
           }}
         />
-      ),
+      )
     };
   };
 
   state = {
-    mapRegion: _defaultMapRegion(),
-    markers: _getMarkersFromAccountList(
-      require('../api/mock/account-list.json')
-    ),
+    accountList: require('../api/mock/account-list.json'),
+    mapRegion: _defaultMapRegion()
+  };
+
+  _showAccountDetail = accountId => {
+    console.log('navigating to ', accountId);
+    //this.props.navigation.navigate('accountDetail', { account: item });
+  };
+
+  _getAccountDetailById = id => {
+    return this.state.accountList.find(item => item.id === id);
   };
 
   render() {
@@ -58,12 +65,18 @@ export default class AccountListMapViewScreen extends React.Component {
               ? MapView.PROVIDER_GOOGLE
               : MapView.PROVIDER_DEFAULT
           }
-          region={this.state.mapRegion}>
-          {this.state.markers.map(marker =>
+          region={this.state.mapRegion}
+        >
+          {_getMarkersFromAccountList(this.state.accountList).map(marker =>
             <MapView.Marker
               coordinate={marker.latlng}
               key={marker.id}
               title={marker.title}
+              onCalloutPress={() => {
+                this.props.navigation.navigate('accountDetail', {
+                  account: this._getAccountDetailById(marker.id)
+                });
+              }}
             />
           )}
         </MapView>
@@ -75,6 +88,6 @@ export default class AccountListMapViewScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
+    backgroundColor: '#fff'
+  }
 });
