@@ -11,8 +11,12 @@ export default class AccountListScreen extends React.Component {
           title="Map"
           onPress={() => navigation.navigate('accountListMap', null)}
         />
-      ),
+      )
     };
+  };
+
+  state = {
+    accountList: require('../api/mock/account-list.json')
   };
 
   _keyExtractor = (item, index) => item.id;
@@ -36,7 +40,7 @@ export default class AccountListScreen extends React.Component {
       <View style={styles.container}>
         <SearchBar noIcon lightTheme placeholder="" />
         <FlatList
-          data={require('../api/mock/account-list.json')}
+          data={this.state.accountList}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
         />
@@ -48,12 +52,12 @@ export default class AccountListScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   getStartedText: {
     fontSize: 17,
     color: 'rgba(96,100,109, 1)',
     lineHeight: 24,
-    textAlign: 'center',
-  },
+    textAlign: 'center'
+  }
 });
