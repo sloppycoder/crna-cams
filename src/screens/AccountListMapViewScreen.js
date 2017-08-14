@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, Dimensions, StyleSheet, View } from 'react-native';
+import { Button, Dimensions, StyleSheet, Text, View } from 'react-native';
 import { Constants, MapView } from 'expo';
+import { loadSettings } from '../utils/localStore';
 
 _defaultMapRegion = () => {
   const { width, height } = Dimensions.get('window');
@@ -41,47 +42,66 @@ export default class AccountListMapViewScreen extends React.Component {
     };
   };
 
-  state = {
-    accountList: require('../api/mock/account-list.json'),
-    mapRegion: _defaultMapRegion()
-  };
+  componentWillMount() {
+    let data = {
+      accountList: require('../api/mock/account-list.json'),
+      mapRegion: _defaultMapRegion()
+    };
 
-  _showAccountDetail = accountId => {
-    console.log('navigating to ', accountId);
-    //this.props.navigation.navigate('accountDetail', { account: item });
-  };
+    this.setState(
+      Object.assign(
+        {
+          loading: true,
+          settings: null
+        },
+        data
+      )
+    );
+
+    loadSettings().then(settings =>
+      this.setState(
+        Object.assign(
+          {
+            loading: false,
+            settings: settings
+          },
+          data
+        )
+      )
+    );
+  }
 
   _getAccountDetailById = id => {
     return this.state.accountList.find(item => item.id === id);
   };
 
   render() {
-    return (
-      <View style={styles.container}>
-        <MapView
-          style={{ alignSelf: 'stretch', height: 600 }}
-          provider={
-            Constants.isDevice
-              ? MapView.PROVIDER_GOOGLE
-              : MapView.PROVIDER_DEFAULT
-          }
-          region={this.state.mapRegion}
-        >
-          {_getMarkersFromAccountList(this.state.accountList).map(marker =>
-            <MapView.Marker
-              coordinate={marker.latlng}
-              key={marker.id}
-              title={marker.title}
-              onCalloutPress={() => {
-                this.props.navigation.navigate('accountDetail', {
-                  account: this._getAccountDetailById(marker.id)
-                });
-              }}
-            />
-          )}
-        </MapView>
-      </View>
-    );
+    return this.state.loading
+      ? <Text>loading...</Text>
+      : <View style={styles.container}>
+          <MapView
+            style={{ alignSelf: 'stretch', height: 600 }}
+            provider={
+              this.state.settings.useGoogleMap
+                ? MapView.PROVIDER_GOOGLE
+                : MapView.PROVIDER_DEFAULT
+            }
+            region={this.state.mapRegion}
+          >
+            {_getMarkersFromAccountList(this.state.accountList).map(marker =>
+              <MapView.Marker
+                coordinate={marker.latlng}
+                key={marker.id}
+                title={marker.title}
+                onCalloutPress={() => {
+                  this.props.navigation.navigate('accountDetail', {
+                    account: this._getAccountDetailById(marker.id)
+                  });
+                }}
+              />
+            )}
+          </MapView>
+        </View>;
   }
 }
 
