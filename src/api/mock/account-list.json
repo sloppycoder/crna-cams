@@ -4,19 +4,21 @@
     "name": "Li Lin",
     "notes": "this is a good guy",
     "phone": "8005551212",
+    "address": "1 Desa Residence, Kuala Lumpur, Malaysia",
     "coord": {
-      "latitude": 37.785718,
-      "longitude": -122.401051
+      "latitude": 3.105515,
+      "longitude": 101.692117
     }
   },
   {
     "id": 2,
-    "name": "John Doe",
-    "notes": "no idea who this guy is",
+    "name": "Mr. Lee",
+    "notes": "very big deal....",
     "phone": "123123123",
+    "address": "Wisma Lyl, Petaling Jaya, Selangor, Malaysia",
     "coord": {
-      "latitude": 37.807413,
-      "longitude": -122.430445
+      "latitude": 3.10265,
+      "longitude": 101.636572
     }
   }
 ]

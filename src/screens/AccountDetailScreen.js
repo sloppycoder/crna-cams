@@ -4,7 +4,7 @@ import { phonecall, text } from 'react-native-communications';
 
 export default class AccountDetailScreen extends Component {
   static navigationOptions = {
-    title: 'Account Detail',
+    title: 'Account Detail'
   };
 
   render() {
@@ -14,6 +14,9 @@ export default class AccountDetailScreen extends Component {
       <View style={styles.container}>
         <Text>
           {account.name}
+        </Text>
+        <Text>
+          {account.address}
         </Text>
         <Button title="Call" onPress={() => phonecall(account.phone, false)} />
         <Button
@@ -28,6 +31,6 @@ export default class AccountDetailScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
+    backgroundColor: '#fff'
+  }
 });
