@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, Linking, StyleSheet, Text, View } from 'react-native';
 import { phonecall, text } from 'react-native-communications';
 
 export default class AccountDetailScreen extends Component {
@@ -22,6 +22,16 @@ export default class AccountDetailScreen extends Component {
         <Button
           title="SMS"
           onPress={() => text(account.phone, 'from your bank...')}
+        />
+        <Button
+          title="Directions"
+          onPress={() => {
+            console.log('driving directions for ', account.address);
+            Linking.openURL(
+              'https://www.google.com/maps/dir/?api=1&destination=' +
+                encodeURI(account.address)
+            );
+          }}
         />
       </View>
     );
