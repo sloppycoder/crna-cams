@@ -63,9 +63,10 @@ exports[`renders without crashing 1`] = `
     data={
       Array [
         Object {
+          "address": "1 Desa Residence, Kuala Lumpur, Malaysia",
           "coord": Object {
-            "latitude": 37.785718,
-            "longitude": -122.401051,
+            "latitude": 3.105515,
+            "longitude": 101.692117,
           },
           "id": 1,
           "name": "Li Lin",
@@ -73,13 +74,14 @@ exports[`renders without crashing 1`] = `
           "phone": "8005551212",
         },
         Object {
+          "address": "Wisma Lyl, Petaling Jaya, Selangor, Malaysia",
           "coord": Object {
-            "latitude": 37.807413,
-            "longitude": -122.430445,
+            "latitude": 3.10265,
+            "longitude": 101.636572,
           },
           "id": 2,
-          "name": "John Doe",
-          "notes": "no idea who this guy is",
+          "name": "Mr. Lee",
+          "notes": "very big deal....",
           "phone": "123123123",
         },
       ]
@@ -395,7 +397,7 @@ exports[`renders without crashing 1`] = `
                     ]
                   }
                 >
-                  John Doe
+                  Mr. Lee
                 </Text>
               </View>
               <View
@@ -412,7 +414,7 @@ exports[`renders without crashing 1`] = `
                       ellipsizeMode="tail"
                       style={undefined}
                     >
-                      no idea who this guy is
+                      very big deal....
                     </Text>
                   </View>
                 </View>
