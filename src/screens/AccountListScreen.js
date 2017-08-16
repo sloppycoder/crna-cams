@@ -8,7 +8,7 @@ import {
   RefreshControl
 } from 'react-native';
 import { ListItem, SearchBar } from 'react-native-elements';
-import Loading from '../components/Loading';
+import Spinner from 'react-native-loading-spinner-overlay';
 import { getAccountList } from '../api/account';
 
 export default class AccountListScreen extends React.Component {
@@ -53,7 +53,11 @@ export default class AccountListScreen extends React.Component {
 
   render() {
     return this.state.loading
-      ? <Text>loading...</Text>
+      ? <Spinner
+          visible={true}
+          textContent={'Loading...'}
+          textStyle={{ color: '#888' }}
+        />
       : <View style={styles.container}>
           <SearchBar noIcon lightTheme placeholder="" />
           <FlatList
@@ -81,5 +85,15 @@ const styles = StyleSheet.create({
     color: 'rgba(96,100,109, 1)',
     lineHeight: 24,
     textAlign: 'center'
+  },
+  centering: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  gray: {
+    backgroundColor: '#cccccc'
+  },
+  horizontal: {
+    flexDirection: 'row'
   }
 });

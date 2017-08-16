@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Dimensions, StyleSheet, Text, View } from 'react-native';
-import { Constants, MapView } from 'expo';
+import { MapView } from 'expo';
+import Spinner from 'react-native-loading-spinner-overlay';
 import { settings } from '../utils/localStore';
 import { getAccountList } from '../api/account';
 
@@ -60,7 +61,11 @@ export default class AccountListMapViewScreen extends React.Component {
 
   render() {
     return this.state.loading
-      ? <Text>loading...</Text>
+      ? <Spinner
+          visible={true}
+          textContent={'Loading...'}
+          textStyle={{ color: '#888' }}
+        />
       : <View style={styles.container}>
           <MapView
             style={{ alignSelf: 'stretch', height: 600 }}
