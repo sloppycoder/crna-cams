@@ -1,6 +1,15 @@
 import React from 'react';
-import { Button, StyleSheet, FlatList, Text, View } from 'react-native';
+import {
+  Button,
+  StyleSheet,
+  FlatList,
+  Text,
+  View,
+  RefreshControl
+} from 'react-native';
 import { ListItem, SearchBar } from 'react-native-elements';
+import Loading from '../components/Loading';
+import { getAccountList } from '../api/account';
 
 export default class AccountListScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -15,8 +24,15 @@ export default class AccountListScreen extends React.Component {
     };
   };
 
-  state = {
-    accountList: require('../api/mock/account-list.json')
+  componentWillMount() {
+    this._refreshAccountList();
+  }
+
+  _refreshAccountList = () => {
+    this.setState({ loading: true });
+    getAccountList().then(value =>
+      this.setState({ loading: false, accountList: value })
+    );
   };
 
   _keyExtractor = (item, index) => item.id;
@@ -36,16 +52,22 @@ export default class AccountListScreen extends React.Component {
     />;
 
   render() {
-    return (
-      <View style={styles.container}>
-        <SearchBar noIcon lightTheme placeholder="" />
-        <FlatList
-          data={this.state.accountList}
-          keyExtractor={this._keyExtractor}
-          renderItem={this._renderItem}
-        />
-      </View>
-    );
+    return this.state.loading
+      ? <Text>loading...</Text>
+      : <View style={styles.container}>
+          <SearchBar noIcon lightTheme placeholder="" />
+          <FlatList
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.loading}
+                onRefresh={this._refreshAccountList}
+              />
+            }
+            data={this.state.accountList}
+            keyExtractor={this._keyExtractor}
+            renderItem={this._renderItem}
+          />
+        </View>;
   }
 }
 

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button, Dimensions, StyleSheet, Text, View } from 'react-native';
 import { Constants, MapView } from 'expo';
-import { loadSettings } from '../utils/localStore';
+import { settings } from '../utils/localStore';
+import { getAccountList } from '../api/account';
 
 _defaultMapRegion = () => {
   const { width, height } = Dimensions.get('window');
@@ -43,31 +44,13 @@ export default class AccountListMapViewScreen extends React.Component {
   };
 
   componentWillMount() {
-    let data = {
-      accountList: require('../api/mock/account-list.json'),
-      mapRegion: _defaultMapRegion()
-    };
-
-    this.setState(
-      Object.assign(
-        {
-          loading: true,
-          settings: null
-        },
-        data
-      )
-    );
-
-    loadSettings().then(settings =>
-      this.setState(
-        Object.assign(
-          {
-            loading: false,
-            settings: settings
-          },
-          data
-        )
-      )
+    this.setState({ loading: true });
+    getAccountList().then(value =>
+      this.setState({
+        loading: false,
+        accountList: value,
+        mapRegion: _defaultMapRegion()
+      })
     );
   }
 
@@ -82,7 +65,7 @@ export default class AccountListMapViewScreen extends React.Component {
           <MapView
             style={{ alignSelf: 'stretch', height: 600 }}
             provider={
-              this.state.settings.useGoogleMap
+              settings.useGoogleMap
                 ? MapView.PROVIDER_GOOGLE
                 : MapView.PROVIDER_DEFAULT
             }
