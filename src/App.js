@@ -3,10 +3,11 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import RootNavigation from './components/RootNavigation';
+import { loadSettings } from './utils/localStore';
 
 export default class App extends React.Component {
   state = {
-    assetsAreLoaded: false,
+    assetsAreLoaded: false
   };
 
   componentWillMount() {
@@ -36,6 +37,7 @@ export default class App extends React.Component {
         //   require('./assets/images/robot-prod.png'),
         // ]),
         Font.loadAsync([Ionicons.font]),
+        loadSettings()
       ]);
     } catch (e) {
       // In this case, you might want to report the error to your error
@@ -54,10 +56,10 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   statusBarUnderlay: {
     height: 24,
-    backgroundColor: 'rgba(0,0,0,0.2)',
-  },
+    backgroundColor: 'rgba(0,0,0,0.2)'
+  }
 });

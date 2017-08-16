@@ -2,8 +2,7 @@ import React from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import SettingsList from 'react-native-settings-list';
 import { Ionicons } from '@expo/vector-icons';
-
-import { loadSettings, saveSettings } from '../utils/localStore';
+import { settings, saveSettings } from '../utils/localStore';
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
@@ -11,64 +10,57 @@ export default class SettingsScreen extends React.Component {
   };
 
   componentWillMount() {
-    this.setState({ loading: true, settings: {} });
-    loadSettings().then(settings =>
-      this.setState({ loading: false, settings: settings })
-    );
+    this.setState({ settings });
   }
 
   onChangeUseGoogleMap = () => {
-    let newState = this.state;
-    newState.settings.useGoogleMap = !newState.settings.useGoogleMap;
-    this.setState(newState);
-    saveSettings(this.state.settings);
+    settings.useGoogleMap = !settings.useGoogleMap;
+    this.setState({ settings });
+    saveSettings();
   };
 
   onChangeUseMockData = () => {
-    let newState = this.state;
-    newState.settings.useMockData = !newState.settings.useMockData;
-    this.setState(newState);
-    saveSettings(this.state.settings);
+    settings.useMockData = !settings.useMockData;
+    this.setState({ settings });
+    saveSettings();
   };
 
   render() {
-    return this.state.loading
-      ? <Text>loading...</Text>
-      : <View style={styles.container}>
-          <View style={styles.container}>
-            <SettingsList borderColor="#c8c7cc" defaultItemSize={50}>
-              {Platform.OS === 'ios' &&
-                <SettingsList.Item
-                  hasSwitch={true}
-                  switchState={this.state.settings.useGoogleMap}
-                  switchOnValueChange={this.onChangeUseGoogleMap}
-                  hasNavArrow={false}
-                  title="Use Google Map"
-                  titleInfo={
-                    this.state.settings.useGoogleMap
-                      ? 'Use Google Map'
-                      : 'Use Apple Map'
-                  }
-                />}
-              <SettingsList.Item
-                title="Navigation"
-                titleInfo="Google Map"
-                titleInfoStyle={styles.titleInfoStyle}
-              />
+    return (
+      <View style={styles.container}>
+        <View style={styles.container}>
+          <SettingsList borderColor="#c8c7cc" defaultItemSize={50}>
+            {Platform.OS === 'ios' &&
               <SettingsList.Item
                 hasSwitch={true}
-                switchState={this.state.settings.useMockData}
-                switchOnValueChange={this.onChangeUseMockData}
+                switchState={this.state.settings.useGoogleMap}
+                switchOnValueChange={this.onChangeUseGoogleMap}
                 hasNavArrow={false}
-                title={
-                  this.state.settings.useMockData
-                    ? 'Use Mock Data'
-                    : 'Use data from ' + this.state.settings.apiUrl
+                title="Use Google Map"
+                titleInfo={
+                  settings.useGoogleMap ? 'Use Google Map' : 'Use Apple Map'
                 }
-              />
-            </SettingsList>
-          </View>
-        </View>;
+              />}
+            <SettingsList.Item
+              title="Navigation"
+              titleInfo="Google Map"
+              titleInfoStyle={styles.titleInfoStyle}
+            />
+            <SettingsList.Item
+              hasSwitch={true}
+              switchState={this.state.settings.useMockData}
+              switchOnValueChange={this.onChangeUseMockData}
+              hasNavArrow={false}
+              title={
+                settings.useMockData
+                  ? 'Use Mock Data'
+                  : 'Use data from ' + settings.apiUrl
+              }
+            />
+          </SettingsList>
+        </View>
+      </View>
+    );
   }
 }
 

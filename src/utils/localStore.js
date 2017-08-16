@@ -10,24 +10,28 @@ DEFAULT_SETTINGS = {
 
 SETTINGS_KEY = 'cam-proto-settings';
 
-let loadSettings = async () => {
-  let s = DEFAULT_SETTINGS;
+let settings = DEFAULT_SETTINGS;
+
+async function loadSettings() {
   try {
-    let settings = await AsyncStorage.getItem(SETTINGS_KEY);
-    if (settings !== null) {
+    let savedSettings = await AsyncStorage.getItem(SETTINGS_KEY);
+    if (savedSettings !== null) {
       // merge default setting with settings loaded from storage
-      s = Object.assign(JSON.parse(settings), DEFAULT_SETTINGS);
+      settings = Object.assign(settings, JSON.parse(savedSettings));
+      console.log('loading settings', settings);
     }
   } catch (error) {
-    consloe('got error when reading settings', error);
+    consloe('error when reading settings', error);
   }
-  console.log('loading settings', s);
-  return s;
-};
+}
 
-let saveSettings = async settings => {
-  console.log('saving settings', settings);
-  await AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
-};
+async function saveSettings() {
+  try {
+    await AsyncStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+    console.log('saved settings', settings);
+  } catch (error) {
+    console.log('error when saving settings', error);
+  }
+}
 
-export { loadSettings, saveSettings };
+export { settings, loadSettings, saveSettings };
