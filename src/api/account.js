@@ -10,7 +10,7 @@ async function getAccountList(userId = 'user1') {
     console.log('getting data from ', url);
     let res = await fetch(url);
     if (res.ok) {
-      return JSON.parse(res.body);
+      return JSON.parse(await res.text());
     }
   }
 }

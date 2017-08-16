@@ -1,90 +1,97 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders without crashing 1`] = `
-<View
-  style={
-    Object {
-      "backgroundColor": "#fff",
-      "flex": 1,
-    }
+<Modal
+  hardwareAccelerated={false}
+  onRequestClose={[Function]}
+  supportedOrientations={
+    Array [
+      "landscape",
+      "portrait",
+    ]
   }
+  transparent={true}
+  visible={true}
 >
   <View
     style={
       Array [
         Object {
-          "backgroundColor": "#393e42",
-          "borderBottomColor": "#000",
-          "borderBottomWidth": 1,
-          "borderTopColor": "#000",
-          "borderTopWidth": 1,
+          "backgroundColor": "transparent",
+          "bottom": 0,
+          "flex": 1,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
         },
         Object {
-          "backgroundColor": "#e1e8ee",
-          "borderBottomColor": "#e1e1e1",
-          "borderTopColor": "#e1e1e1",
+          "backgroundColor": "rgba(0, 0, 0, 0.25)",
         },
-        undefined,
       ]
     }
   >
-    <TextInput
-      placeholder=""
-      placeholderTextColor="#86939e"
+    <View
       style={
-        Array [
-          Object {
-            "backgroundColor": "#303337",
-            "borderRadius": 3,
-            "color": "#86939e",
-            "fontSize": 17.5,
-            "height": 30,
-            "margin": 8,
-            "overflow": "hidden",
-            "paddingLeft": 26,
-            "paddingRight": 19,
-          },
-          Object {
-            "backgroundColor": "#bdc6cf",
-          },
-          Object {
-            "paddingLeft": 9,
-          },
-          false,
-          undefined,
-          undefined,
-          false,
-        ]
+        Object {
+          "alignItems": "center",
+          "bottom": 0,
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
       }
-      underlineColorAndroid="transparent"
-    />
+    >
+      <ActivityIndicator
+        animating={true}
+        color="white"
+        hidesWhenStopped={true}
+        size="large"
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      />
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "bottom": 0,
+            "flex": 1,
+            "justifyContent": "center",
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "fontSize": 20,
+                "fontWeight": "bold",
+                "height": 50,
+                "top": 80,
+              },
+              Object {
+                "color": "#888",
+              },
+            ]
+          }
+        >
+          Loading...
+        </Text>
+      </View>
+    </View>
   </View>
-  <RCTScrollView
-    data={undefined}
-    disableVirtualization={false}
-    getItem={[Function]}
-    getItemCount={[Function]}
-    horizontal={false}
-    initialNumToRender={10}
-    keyExtractor={[Function]}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onContentSizeChange={[Function]}
-    onEndReachedThreshold={2}
-    onLayout={[Function]}
-    onMomentumScrollEnd={[Function]}
-    onScroll={[Function]}
-    onScrollBeginDrag={[Function]}
-    onScrollEndDrag={[Function]}
-    onViewableItemsChanged={undefined}
-    renderItem={[Function]}
-    renderScrollComponent={[Function]}
-    scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
-    updateCellsBatchingPeriod={50}
-    windowSize={21}
-  >
-    <View />
-  </RCTScrollView>
-</View>
+</Modal>
 `;
