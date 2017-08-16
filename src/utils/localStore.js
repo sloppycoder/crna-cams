@@ -1,16 +1,20 @@
 import { AsyncStorage, Platform } from 'react-native';
 import { Constants } from 'expo';
 
-DEFAULT_SETTINGS = {
-  useTouchId: false,
-  useGoogleMap: Constants.isDevice,
-  useMockData: true,
-  apiUrl: 'https://vino9.net/api/cams'
-};
+DEFAULT_SETTINGS = () =>
+  Object.assign(
+    {},
+    {
+      useTouchId: false,
+      useGoogleMap: Constants.isDevice,
+      useMockData: true,
+      apiUrl: 'https://vino9.net/api/cams'
+    }
+  );
 
 SETTINGS_KEY = 'cam-proto-settings';
 
-let settings = DEFAULT_SETTINGS;
+let settings = DEFAULT_SETTINGS();
 
 async function loadSettings() {
   try {
@@ -36,9 +40,9 @@ async function saveSettings() {
   }
 }
 
-async function ResetSettings() {
-  settings = DEFAULT_SETTINGS;
+async function resetSettings() {
+  settings = DEFAULT_SETTINGS();
   saveSettings();
 }
 
-export { settings, loadSettings, saveSettings };
+export { settings, loadSettings, saveSettings, resetSettings };

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Alert, Button, Platform, StyleSheet, Text, View } from 'react-native';
 import SettingsList from 'react-native-settings-list';
 import { Ionicons } from '@expo/vector-icons';
-import { settings, saveSettings } from '../utils/localStore';
+import { settings, saveSettings, resetSettings } from '../utils/localStore';
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
@@ -23,6 +23,12 @@ export default class SettingsScreen extends React.Component {
     settings.useMockData = !settings.useMockData;
     this.setState({ settings });
     saveSettings();
+  };
+
+  _resetSettings = () => {
+    resetSettings().then(() => {
+      this.setState({ settings });
+    });
   };
 
   render() {
@@ -58,6 +64,14 @@ export default class SettingsScreen extends React.Component {
               }
             />
           </SettingsList>
+          <Button
+            title="Reset to defaults"
+            onPress={() =>
+              Alert.alert('Reset Settings', 'Reset all options to default?', [
+                { text: 'OK', onPress: () => this._resetSettings() },
+                { text: 'Cancel', onPress: () => {} }
+              ])}
+          />
         </View>
       </View>
     );
