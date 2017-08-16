@@ -2,7 +2,10 @@ import { AsyncStorage, Platform } from 'react-native';
 import { Constants } from 'expo';
 
 DEFAULT_SETTINGS = {
-  useGoogleMap: Constants.isDevice
+  useTouchId: false,
+  useGoogleMap: Constants.isDevice,
+  useMockData: true,
+  apiUrl: 'https://vino9.net/api/'
 };
 
 SETTINGS_KEY = 'cam-proto-settings';
@@ -12,7 +15,8 @@ let loadSettings = async () => {
   try {
     let settings = await AsyncStorage.getItem(SETTINGS_KEY);
     if (settings !== null) {
-      s = JSON.parse(settings);
+      // merge default setting with settings loaded from storage
+      s = Object.assign(JSON.parse(settings), DEFAULT_SETTINGS);
     }
   } catch (error) {
     consloe('got error when reading settings', error);

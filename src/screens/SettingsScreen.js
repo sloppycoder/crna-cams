@@ -24,6 +24,13 @@ export default class SettingsScreen extends React.Component {
     saveSettings(this.state.settings);
   };
 
+  onChangeUseMockData = () => {
+    let newState = this.state;
+    newState.settings.useMockData = !newState.settings.useMockData;
+    this.setState(newState);
+    saveSettings(this.state.settings);
+  };
+
   render() {
     return this.state.loading
       ? <Text>loading...</Text>
@@ -37,11 +44,27 @@ export default class SettingsScreen extends React.Component {
                   switchOnValueChange={this.onChangeUseGoogleMap}
                   hasNavArrow={false}
                   title="Use Google Map"
+                  titleInfo={
+                    this.state.settings.useGoogleMap
+                      ? 'Use Google Map'
+                      : 'Use Apple Map'
+                  }
                 />}
               <SettingsList.Item
                 title="Navigation"
                 titleInfo="Google Map"
                 titleInfoStyle={styles.titleInfoStyle}
+              />
+              <SettingsList.Item
+                hasSwitch={true}
+                switchState={this.state.settings.useMockData}
+                switchOnValueChange={this.onChangeUseMockData}
+                hasNavArrow={false}
+                title={
+                  this.state.settings.useMockData
+                    ? 'Use Mock Data'
+                    : 'Use data from ' + this.state.settings.apiUrl
+                }
               />
             </SettingsList>
           </View>
