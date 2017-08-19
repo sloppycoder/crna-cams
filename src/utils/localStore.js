@@ -12,9 +12,17 @@ DEFAULT_SETTINGS = () =>
     }
   );
 
+DEFAULT_USER = {
+  login: 'guru.lin@gmail.com',
+  fullName: 'Mister Lee',
+  accessToken: 'dummytoken'
+};
+
 SETTINGS_KEY = 'cam-proto-settings';
+CURRENT_USER_KEY = 'current-user';
 
 let settings = DEFAULT_SETTINGS();
+let currentUser = null;
 
 async function loadSettings() {
   try {
@@ -45,4 +53,43 @@ async function resetSettings() {
   saveSettings();
 }
 
-export { settings, loadSettings, saveSettings, resetSettings };
+async function setCurrentUser(userInfo) {
+  try {
+    await AsyncStorage.setItem(CURRENT_USER_KEY, JSON.stringify(userInfo));
+    currentUser = userInfo;
+    console.log('saved userInfo', currentUser);
+  } catch (error) {
+    console.log('error when saving userInfo', error);
+  }
+}
+
+async function loadCurrentUser() {
+  try {
+    let savedData = await AsyncStorage.getItem(CURRENT_USER_KEY);
+    if (savedData !== null) {
+      currentUser = JSON.parse(savedData);
+    }
+  } catch (error) {
+    consloe('error when reading settings', error);
+  }
+}
+
+async function loadAppState() {
+  await loadCurrentUser();
+  await loadSettings();
+}
+
+async function saveAppState() {
+  await saveCurrentUser();
+  await saveSettings();
+}
+
+export {
+  settings,
+  currentUser,
+  loadAppState,
+  saveAppState,
+  resetSettings,
+  loadCurrentUser,
+  setCurrentUser
+};

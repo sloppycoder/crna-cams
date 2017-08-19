@@ -1,28 +1,33 @@
 import React from 'react';
+import { Platform, StatusBar } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
-import AccountListScreen from '../screens/AccountListScreen';
-import AccountListMapViewScreen from '../screens/AccountListMapViewScreen';
-import AccountDetailScreen from '../screens/AccountDetailScreen';
+import LoginScreen from '../screens/LoginScreen';
 import { getCurrentRouteName, trackScreen } from '../utils/analytics';
+import { currentUser } from '../utils/localStore';
+
+const screenChange = (prevState, currentState) => {
+  const currentScreen = getCurrentRouteName(currentState);
+  const prevScreen = getCurrentRouteName(prevState);
+  if (prevScreen !== currentScreen) {
+    trackScreen(currentScreen);
+  }
+};
 
 const RootStackNavigator = StackNavigator(
   {
     main: {
       screen: MainTabNavigator
     },
-    accountList: { screen: AccountListScreen },
-    accountListMap: { screen: AccountListMapViewScreen },
-    accountDetail: { screen: AccountDetailScreen }
+    login: {
+      screen: LoginScreen
+    }
   },
   {
-    initialRouteName: 'main',
-    navigationOptions: () => ({
-      headerTitleStyle: {
-        fontWeight: 'normal'
-      }
-    })
+    headerMode: 'none',
+    mode: 'modal',
+    initialRouteName: currentUser ? 'main' : 'login'
   }
 );
 
@@ -36,17 +41,7 @@ export default class RootNavigator extends React.Component {
   }
 
   render() {
-    return (
-      <RootStackNavigator
-        onNavigationStateChange={(prevState, currentState) => {
-          const currentScreen = getCurrentRouteName(currentState);
-          const prevScreen = getCurrentRouteName(prevState);
-          if (prevScreen !== currentScreen) {
-            trackScreen(currentScreen);
-          }
-        }}
-      />
-    );
+    return <RootStackNavigator onNavigationStateChange={screenChange} />;
   }
 
   _registerForPushNotifications() {

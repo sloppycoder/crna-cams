@@ -5,7 +5,8 @@ import {
   FlatList,
   Text,
   View,
-  RefreshControl
+  RefreshControl,
+  StatusBar
 } from 'react-native';
 import { ListItem, SearchBar } from 'react-native-elements';
 import Spinner from 'react-native-loading-spinner-overlay';
