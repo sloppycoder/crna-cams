@@ -30,7 +30,8 @@ async function loginByGoogle() {
       setCurrentUser({
         accessToken: result.accessToken,
         fullName: result.user.name,
-        email: result.user.email
+        email: result.user.email,
+        photoUrl: result.user.photoUrl
       });
     } else {
       return { cancelled: true };

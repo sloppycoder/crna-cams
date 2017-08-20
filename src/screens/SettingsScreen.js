@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Alert,
   Button,
+  Image,
   Platform,
   StatusBar,
   StyleSheet,
@@ -60,10 +61,9 @@ export default class SettingsScreen extends React.Component {
           {this.state.currentUser &&
             <Card title="Current User">
               <View>
-                <Ionicons
-                  name={Platform.OS === 'ios' ? 'ios-camera' : 'md-camera'}
-                  size={64}
-                  style={{ marginBottom: -3 }}
+                <Image
+                  style={{ width: 50, height: 50 }}
+                  source={{ uri: this.state.currentUser.photoUrl }}
                 />
                 <Text>
                   {currentUser.fullName}
