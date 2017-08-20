@@ -16,7 +16,7 @@
     "react-native-scripts": "^1.1.0",
     "react-test-renderer": "16.0.0-alpha.12"
   },
-  "main": "./crna-entry.js",
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
     "start": "react-native-scripts start",
     "eject": "react-native-scripts eject",
