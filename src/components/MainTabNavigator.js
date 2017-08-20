@@ -42,8 +42,11 @@ export default TabNavigator(
         );
       }
     }),
+    tabBarComponent: TabBarBottom,
+    tabBarPosition: 'bottom',
     tabBarOptions: {
-      showLabel: Platform.OS === 'android',
+      showIcon: true,
+      showLabel: false,
       style: {
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 20
       }
