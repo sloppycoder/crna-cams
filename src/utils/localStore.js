@@ -12,12 +12,6 @@ DEFAULT_SETTINGS = () =>
     }
   );
 
-DEFAULT_USER = {
-  login: 'guru.lin@gmail.com',
-  fullName: 'Mister Lee',
-  accessToken: 'dummytoken'
-};
-
 SETTINGS_KEY = 'cam-proto-settings';
 CURRENT_USER_KEY = 'current-user';
 
@@ -75,13 +69,13 @@ async function loadCurrentUser() {
 }
 
 async function loadAppState() {
-  await loadCurrentUser();
   await loadSettings();
+  await loadCurrentUser();
 }
 
 async function saveAppState() {
-  await saveCurrentUser();
   await saveSettings();
+  await saveCurrentUser();
 }
 
 export {
