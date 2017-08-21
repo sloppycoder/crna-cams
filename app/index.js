@@ -3,7 +3,7 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import RootNavigation from './components/RootNavigation';
-import { loadAppState } from './utils/localStore';
+import { loadCurrentUser, loadSettings } from './utils/localStore';
 
 export default class App extends React.Component {
   state = {
@@ -37,7 +37,8 @@ export default class App extends React.Component {
         //   require('./assets/images/robot-prod.png'),
         // ]),
         Font.loadAsync([Ionicons.font]),
-        loadAppState()
+        loadCurrentUser(),
+        loadSettings()
       ]);
     } catch (e) {
       // In this case, you might want to report the error to your error

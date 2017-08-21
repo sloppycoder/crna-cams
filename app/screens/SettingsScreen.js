@@ -17,7 +17,7 @@ import { Card } from 'react-native-elements';
 import {
   currentUser,
   settings,
-  saveAppState,
+  saveSettings,
   resetSettings,
   setCurrentUser
 } from '../utils/localStore';
@@ -34,13 +34,13 @@ export default class SettingsScreen extends React.Component {
   onChangeUseGoogleMap = () => {
     settings.useGoogleMap = !settings.useGoogleMap;
     this.setState({ settings });
-    saveAppState();
+    saveSettings();
   };
 
   onChangeUseMockData = () => {
     settings.useMockData = !settings.useMockData;
     this.setState({ settings });
-    saveAppState();
+    saveSettings();
   };
 
   _resetSettings = () => {

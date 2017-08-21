@@ -68,21 +68,11 @@ async function loadCurrentUser() {
   }
 }
 
-async function loadAppState() {
-  await loadSettings();
-  await loadCurrentUser();
-}
-
-async function saveAppState() {
-  await saveSettings();
-  await saveCurrentUser();
-}
-
 export {
   settings,
   currentUser,
-  loadAppState,
-  saveAppState,
+  loadSettings,
+  saveSettings,
   resetSettings,
   loadCurrentUser,
   setCurrentUser
