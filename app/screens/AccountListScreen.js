@@ -5,8 +5,7 @@ import {
   FlatList,
   Text,
   View,
-  RefreshControl,
-  StatusBar
+  RefreshControl
 } from 'react-native';
 import { ListItem, SearchBar } from 'react-native-elements';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -36,7 +35,7 @@ export default class AccountListScreen extends React.Component {
     );
   };
 
-  _keyExtractor = (item, index) => item.id;
+  _keyExtractor = (item, index) => item.id; // eslint-disable-line no-unused-vars
 
   _renderItem = ({ item }) =>
     <ListItem

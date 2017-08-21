@@ -1,5 +1,4 @@
 import React from 'react';
-import { Platform, StatusBar } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';

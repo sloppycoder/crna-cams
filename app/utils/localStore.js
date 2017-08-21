@@ -1,4 +1,4 @@
-import { AsyncStorage, Platform } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import { Constants } from 'expo';
 
 DEFAULT_SETTINGS = () =>

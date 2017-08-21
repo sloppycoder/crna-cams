@@ -1,3 +1,5 @@
+/*eslint "import/default": 0 */
+
 import React from 'react';
 import {
   Alert,
@@ -9,10 +11,8 @@ import {
   Text,
   View
 } from 'react-native';
-import SettingsList from 'react-native-settings-list';
+import SettingsList from 'react-native-settings-list'; // eslint-disable-line no-use-before-define
 import { Card } from 'react-native-elements';
-import { Constants } from 'expo';
-import { Ionicons } from '@expo/vector-icons';
 
 import {
   currentUser,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Dimensions, StyleSheet, Text, View } from 'react-native';
+import { Button, Dimensions, StyleSheet, View } from 'react-native';
 import { MapView } from 'expo';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { settings } from '../utils/localStore';
