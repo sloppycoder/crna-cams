@@ -1,15 +1,10 @@
 import React from 'react';
-import {
-  Button,
-  Dimensions,
-  StyleSheet,
-  View,
-  ActivityIndicator
-} from 'react-native';
+import { Button, Dimensions, View, ActivityIndicator } from 'react-native';
 import { MapView } from 'expo';
 import { connect } from 'react-redux';
 
 import { getAccountList } from '../api/account';
+import styles from '../styles';
 
 _defaultMapRegion = () => {
   const { width, height } = Dimensions.get('window');
@@ -97,13 +92,6 @@ class AccountListMapViewScreen extends React.Component {
         </View>;
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff'
-  }
-});
 
 const mapStateToProps = ({ settings }) => {
   return { settings };

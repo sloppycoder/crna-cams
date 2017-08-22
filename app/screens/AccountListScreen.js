@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Button,
-  StyleSheet,
   FlatList,
   Text,
   View,
@@ -10,8 +9,8 @@ import {
 } from 'react-native';
 import { ListItem, SearchBar } from 'react-native-elements';
 import { connect } from 'react-redux';
-
 import { getAccountList } from '../api/account';
+import styles from '../styles';
 
 class AccountListScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -75,29 +74,6 @@ class AccountListScreen extends React.Component {
         </View>;
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff'
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    lineHeight: 24,
-    textAlign: 'center'
-  },
-  centering: {
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  gray: {
-    backgroundColor: '#cccccc'
-  },
-  horizontal: {
-    flexDirection: 'row'
-  }
-});
 
 const mapStateToProps = ({ settings }) => {
   return { settings };

@@ -1,10 +1,11 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, View } from 'react-native';
 import { Provider } from 'react-redux';
 import { AppLoading, Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 
 import RootNavigation from './components/RootNavigation';
+import styles from './styles';
 import store from './store';
 
 class App extends React.Component {
@@ -53,17 +54,6 @@ class App extends React.Component {
     }
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff'
-  },
-  statusBarUnderlay: {
-    height: 24,
-    backgroundColor: 'rgba(0,0,0,0.2)'
-  }
-});
 
 export default () => {
   return (

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Platform, StyleSheet, StatusBar, View } from 'react-native';
+import { Button, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 
 import { userLoginSuccess } from '../actions';
+import styles from '../styles';
 
 async function loginByGoogle() {
   try {
@@ -52,7 +53,7 @@ class LoginScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.loginContainer}>
         <Ionicons
           name="logo-google"
           size={64}
@@ -67,16 +68,6 @@ class LoginScreen extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 20
-  }
-});
 
 const mapStateToProps = ({ auth }) => ({ auth });
 

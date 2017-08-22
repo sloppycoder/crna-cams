@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Linking, StyleSheet, Text, View } from 'react-native';
+import { Button, Linking, Text, View } from 'react-native';
 import { phonecall, text } from 'react-native-communications';
+
+import styles from '../styles';
 
 export default class AccountDetailScreen extends Component {
   static navigationOptions = {
@@ -36,10 +38,3 @@ export default class AccountDetailScreen extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff'
-  }
-});

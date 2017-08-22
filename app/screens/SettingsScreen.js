@@ -1,21 +1,13 @@
 /*eslint "import/default": 0 */
 
 import React from 'react';
-import {
-  Alert,
-  Button,
-  Image,
-  Platform,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { Alert, Button, Image, Platform, Text, View } from 'react-native';
 import SettingsList from 'react-native-settings-list'; // eslint-disable-line no-use-before-define
 import { Card } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import { settingsChanged, resetSettings, userLogout } from '../actions';
+import styles from '../styles';
 
 class SettingsScreen extends React.Component {
   static navigationOptions = {
@@ -121,14 +113,6 @@ class SettingsScreen extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#efeff4',
-    marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 20
-  }
-});
 
 const mapStateToProps = ({ settings, auth }) => {
   return { settings, currentUser: auth.userInfo };
