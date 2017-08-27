@@ -1,6 +1,9 @@
-import { settings } from '../utils/localStore';
+function trackScreen(screenName) {
+  // place holder for mobile analytics logicinsert mobile analytics tracker here
+  console.log(`tracking screen ${screenName}`);
+}
 
-// gets the current screen from navigation state
+// gets the current screen from navigation state (without Redux)
 function getCurrentRouteName(navigationState) {
   if (!navigationState) {
     return null;
@@ -13,18 +16,10 @@ function getCurrentRouteName(navigationState) {
   return route.routeName;
 }
 
-function trackScreen(screenName) {
-  // insert mobile analytics tracker here
-  let info = screenName;
-  switch (screenName) {
-    case 'accountListMap':
-      info = info + settings.useGoogleMap ? '/Google Map' : '/Apple Map';
-      break;
-    case 'accountDetail':
-      info = info + '/id=?';
-      break;
+export const screenChange = (prevState, currentState) => {
+  const currentScreen = getCurrentRouteName(currentState);
+  const prevScreen = getCurrentRouteName(prevState);
+  if (prevScreen !== currentScreen) {
+    trackScreen(currentScreen);
   }
-  console.log('tracking screen ' + info);
-}
-
-export { getCurrentRouteName, trackScreen };
+};

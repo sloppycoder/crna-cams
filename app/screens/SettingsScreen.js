@@ -13,57 +13,59 @@ import {
 } from 'react-native';
 import SettingsList from 'react-native-settings-list'; // eslint-disable-line no-use-before-define
 import { Card } from 'react-native-elements';
+import { connect } from 'react-redux';
 
-import {
-  currentUser,
-  settings,
-  saveSettings,
-  resetSettings,
-  setCurrentUser
-} from '../utils/localStore';
+import { settingsChanged, resetSettings, userLogout } from '../actions';
 
-export default class SettingsScreen extends React.Component {
+class SettingsScreen extends React.Component {
   static navigationOptions = {
     title: 'Settings'
   };
 
   componentWillMount() {
-    this.setState({ settings, currentUser });
+    this.setState({ settings: this.props.settings });
   }
 
   onChangeUseGoogleMap = () => {
-    settings.useGoogleMap = !settings.useGoogleMap;
-    this.setState({ settings });
-    saveSettings();
+    const newSettings = {
+      ...this.state.settings,
+      useGoogleMap: !this.state.settings.useGoogleMap
+    };
+    this.props.settingsChanged(newSettings);
+    this.setState({ settings: newSettings });
   };
 
   onChangeUseMockData = () => {
-    settings.useMockData = !settings.useMockData;
-    this.setState({ settings });
-    saveSettings();
+    const newSettings = {
+      ...this.state.settings,
+      useMockData: !this.state.settings.useMockData
+    };
+    this.props.settingsChanged(newSettings);
+    this.setState({ settings: newSettings });
   };
 
   _resetSettings = () => {
-    resetSettings().then(() => {
-      this.setState({ settings });
-    });
+    this.props.resetSettings();
+    this.setState({ settings: this.props.settings });
   };
 
   _doLogout = () => {
     console.log('logout from Google');
-    setCurrentUser(null).then(this.props.navigation.navigate('login'));
+    this.props.userLogout();
+    this.props.navigation.navigate('login');
   };
 
   render() {
+    const { currentUser } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.container}>
-          {this.state.currentUser &&
+          {currentUser &&
             <Card title="Current User">
               <View>
                 <Image
                   style={{ width: 50, height: 50 }}
-                  source={{ uri: this.state.currentUser.photoUrl }}
+                  source={{ uri: currentUser.photoUrl }}
                 />
                 <Text>
                   {currentUser.fullName}
@@ -84,7 +86,9 @@ export default class SettingsScreen extends React.Component {
                 hasNavArrow={false}
                 title="Use Google Map"
                 titleInfo={
-                  settings.useGoogleMap ? 'Use Google Map' : 'Use Apple Map'
+                  this.state.settings.useGoogleMap
+                    ? 'Use Google Map'
+                    : 'Use Apple Map'
                 }
               />}
             <SettingsList.Item
@@ -98,9 +102,9 @@ export default class SettingsScreen extends React.Component {
               switchOnValueChange={this.onChangeUseMockData}
               hasNavArrow={false}
               title={
-                settings.useMockData
+                this.state.settings.useMockData
                   ? 'Use Mock Data'
-                  : 'Use data from ' + settings.apiUrl
+                  : 'Use data from ' + this.state.settings.apiUrl
               }
             />
           </SettingsList>
@@ -125,3 +129,13 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 20
   }
 });
+
+const mapStateToProps = ({ settings, auth }) => {
+  return { settings, currentUser: auth.userInfo };
+};
+
+export default connect(mapStateToProps, {
+  settingsChanged,
+  resetSettings,
+  userLogout
+})(SettingsScreen);

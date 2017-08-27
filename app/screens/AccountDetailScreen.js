@@ -9,7 +9,6 @@ export default class AccountDetailScreen extends Component {
 
   render() {
     const { account } = this.props.navigation.state.params;
-    console.log('account details', account);
     return (
       <View style={styles.container}>
         <Text>

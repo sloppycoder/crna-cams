@@ -1,8 +1,14 @@
 import React from 'react';
-import { Button, Dimensions, StyleSheet, View } from 'react-native';
+import {
+  Button,
+  Dimensions,
+  StyleSheet,
+  View,
+  ActivityIndicator
+} from 'react-native';
 import { MapView } from 'expo';
-import Spinner from 'react-native-loading-spinner-overlay';
-import { settings } from '../utils/localStore';
+import { connect } from 'react-redux';
+
 import { getAccountList } from '../api/account';
 
 _defaultMapRegion = () => {
@@ -29,7 +35,7 @@ _getMarkersFromAccountList = accountList =>
     };
   });
 
-export default class AccountListMapViewScreen extends React.Component {
+class AccountListMapViewScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'Accounts Map',
@@ -46,7 +52,10 @@ export default class AccountListMapViewScreen extends React.Component {
 
   componentWillMount() {
     this.setState({ loading: true });
-    getAccountList().then(value =>
+
+    const { settings } = this.props;
+    const baseUrl = settings.useMockData ? null : settings.apiUrl;
+    getAccountList(baseUrl).then(value =>
       this.setState({
         loading: false,
         accountList: value,
@@ -61,16 +70,12 @@ export default class AccountListMapViewScreen extends React.Component {
 
   render() {
     return this.state.loading
-      ? <Spinner
-          visible={true}
-          textContent={'Loading...'}
-          textStyle={{ color: '#888' }}
-        />
+      ? <ActivityIndicator size="large" />
       : <View style={styles.container}>
           <MapView
             style={{ alignSelf: 'stretch', height: 600 }}
             provider={
-              settings.useGoogleMap
+              this.props.settings.useGoogleMap
                 ? MapView.PROVIDER_GOOGLE
                 : MapView.PROVIDER_DEFAULT
             }
@@ -99,3 +104,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   }
 });
+
+const mapStateToProps = ({ settings }) => {
+  return { settings };
+};
+
+export default connect(mapStateToProps)(AccountListMapViewScreen);

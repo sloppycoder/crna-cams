@@ -3,16 +3,7 @@ import { StackNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
 import LoginScreen from '../screens/LoginScreen';
-import { getCurrentRouteName, trackScreen } from '../utils/analytics';
-import { currentUser } from '../utils/localStore';
-
-const screenChange = (prevState, currentState) => {
-  const currentScreen = getCurrentRouteName(currentState);
-  const prevScreen = getCurrentRouteName(prevState);
-  if (prevScreen !== currentScreen) {
-    trackScreen(currentScreen);
-  }
-};
+import { screenChange } from '../utils/analytics';
 
 const RootStackNavigator = StackNavigator(
   {
@@ -26,7 +17,7 @@ const RootStackNavigator = StackNavigator(
   {
     headerMode: 'none',
     mode: 'modal',
-    initialRouteName: currentUser ? 'main' : 'login'
+    initialRouteName: 'login'
   }
 );
 

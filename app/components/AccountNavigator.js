@@ -4,6 +4,7 @@ import { StackNavigator } from 'react-navigation';
 import AccountListScreen from '../screens/AccountListScreen';
 import AccountListMapViewScreen from '../screens/AccountListMapViewScreen';
 import AccountDetailScreen from '../screens/AccountDetailScreen';
+import { screenChange } from '../utils/analytics';
 
 const AccountStackNavigator = StackNavigator(
   {
@@ -19,6 +20,6 @@ const AccountStackNavigator = StackNavigator(
 
 export default class AccountNavigator extends React.Component {
   render() {
-    return <AccountStackNavigator />;
+    return <AccountStackNavigator onNavigationStateChange={screenChange} />;
   }
 }

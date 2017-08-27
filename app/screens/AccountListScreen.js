@@ -5,13 +5,15 @@ import {
   FlatList,
   Text,
   View,
-  RefreshControl
+  RefreshControl,
+  ActivityIndicator
 } from 'react-native';
 import { ListItem, SearchBar } from 'react-native-elements';
-import Spinner from 'react-native-loading-spinner-overlay';
+import { connect } from 'react-redux';
+
 import { getAccountList } from '../api/account';
 
-export default class AccountListScreen extends React.Component {
+class AccountListScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'Accounts',
@@ -30,7 +32,10 @@ export default class AccountListScreen extends React.Component {
 
   _refreshAccountList = () => {
     this.setState({ loading: true });
-    getAccountList().then(value =>
+
+    const { settings } = this.props;
+    const baseUrl = settings.useMockData ? null : settings.apiUrl;
+    getAccountList(baseUrl).then(value =>
       this.setState({ loading: false, accountList: value })
     );
   };
@@ -53,11 +58,7 @@ export default class AccountListScreen extends React.Component {
 
   render() {
     return this.state.loading
-      ? <Spinner
-          visible={true}
-          textContent={'Loading...'}
-          textStyle={{ color: '#888' }}
-        />
+      ? <ActivityIndicator size="large" />
       : <View style={styles.container}>
           <SearchBar noIcon lightTheme placeholder="" />
           <FlatList
@@ -97,3 +98,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   }
 });
+
+const mapStateToProps = ({ settings }) => {
+  return { settings };
+};
+
+export default connect(mapStateToProps)(AccountListScreen);
