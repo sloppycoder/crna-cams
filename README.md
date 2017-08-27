@@ -14,6 +14,9 @@ Tested with the following components
 # clone this repo.
 yarn 
 
+# install RN debugger via Homebrew. optional
+brew update && brew cask install react-native-debugger
+
 # run in iOS simulator
 yarn ios 
 

@@ -13,11 +13,13 @@
     "jest-expo": "~20.0.0",
     "lint-staged": "^4.0.2",
     "prettier": "^1.5.3",
+    "react-native-debugger-open": "^0.3.12",
     "react-native-scripts": "^1.1.0",
     "react-test-renderer": "16.0.0-alpha.12"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
+    "postinstall": "rndebugger-open",
     "start": "react-native-scripts start",
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
@@ -43,6 +45,7 @@
     "react-navigation": "^1.0.0-beta.12",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0"
   }
 }
