@@ -21,6 +21,10 @@ class LoginScreen extends Component {
     title: 'Login'
   };
 
+  componentWillMount() {
+    this.props.auth.isLoggedIn && this.props.navigation.navigate('main');
+  }
+
   _doLogin = () => {
     this.props.userLoginSuccess(DUMMY_USER);
     this.props.navigation.navigate('main');

@@ -3,6 +3,7 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux';
 import { AppLoading, Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
+
 import RootNavigation from './components/RootNavigation';
 import store from './store';
 
