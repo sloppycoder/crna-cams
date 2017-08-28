@@ -14,7 +14,7 @@ export default (state = INITIAL_AUTH_STATE, action) => {
     case USER_LOGIN_START:
       return { ...state, loading: true, error: '' };
     case USER_LOGIN_SUCCESS:
-      return action.payload;
+      return { ...action.payload, isLoggedIn: true };
     case USER_LOGOUT:
       return INITIAL_AUTH_STATE;
     default:

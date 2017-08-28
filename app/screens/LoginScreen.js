@@ -5,16 +5,33 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { userLoginSuccess } from '../actions';
 
-const DUMMY_USER = {
-  isLoggedIn: true,
-  userInfo: {
-    accessToken: 'blah_token',
-    fullName: 'Li Lin',
-    email: 'lilin@lilin.com',
-    photoUrl:
-      'https://www.sc.com/en/resources/global-en/img/home/Private_Banking_169x60.jpg'
+async function loginByGoogle() {
+  try {
+    const result = await Expo.Google.logInAsync({
+      iosClientId:
+        '391024201222-ljp9geta9e1mj4m14sg2bimh04phbn0c.apps.googleusercontent.com',
+      androidClientId:
+        '391024201222-8k77d0m8fb5tatknsqbgbok2esmtco9u.apps.googleusercontent.com',
+      scopes: ['profile', 'email']
+    });
+
+    if (result.type === 'success') {
+      console.log('login success', result);
+      return {
+        userInfo: {
+          accessToken: result.accessToken,
+          fullName: result.user.name,
+          email: result.user.email,
+          photoUrl: result.user.photoUrl
+        }
+      };
+    } else {
+      return { cancelled: true };
+    }
+  } catch (e) {
+    return { error: true };
   }
-};
+}
 
 class LoginScreen extends Component {
   static navigationOptions = {
@@ -26,8 +43,11 @@ class LoginScreen extends Component {
   }
 
   _doLogin = () => {
-    this.props.userLoginSuccess(DUMMY_USER);
-    this.props.navigation.navigate('main');
+    this.setState({ loading: true });
+    loginByGoogle().then(userInfo => {
+      this.props.userLoginSuccess(userInfo);
+      this.props.navigation.navigate('main');
+    });
   };
 
   render() {
