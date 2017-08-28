@@ -1,6 +1,6 @@
 {
   "extends": ["react-native-prettier"],
   "rules": {
-    "prettier/prettier": "off"
+    "prettier/prettier": 1
   }
 }
