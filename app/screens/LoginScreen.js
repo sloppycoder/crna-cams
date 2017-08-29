@@ -46,8 +46,10 @@ class LoginScreen extends Component {
   _doLogin = () => {
     this.setState({ loading: true });
     loginByGoogle().then(userInfo => {
-      this.props.userLoginSuccess(userInfo);
-      this.props.navigation.navigate('main');
+      if (!userInfo.error && !userInfo.cancelled) {
+        this.props.userLoginSuccess(userInfo);
+        this.props.navigation.navigate('main');
+      }
     });
   };
 
