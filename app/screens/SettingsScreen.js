@@ -96,7 +96,7 @@ class SettingsScreen extends React.Component {
               title={
                 this.state.settings.useMockData
                   ? 'Use Mock Data'
-                  : 'Use data from ' + this.state.settings.apiUrl
+                  : 'Use data from AWS API'
               }
             />
           </SettingsList>

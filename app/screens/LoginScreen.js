@@ -20,6 +20,7 @@ async function loginByGoogle() {
       console.log('login success', result);
       return {
         userInfo: {
+          idToken: result.idToken,
           accessToken: result.accessToken,
           fullName: result.user.name,
           email: result.user.email,

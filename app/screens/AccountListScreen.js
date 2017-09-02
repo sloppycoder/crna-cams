@@ -32,9 +32,9 @@ class AccountListScreen extends React.Component {
   _refreshAccountList = () => {
     this.setState({ loading: true });
 
-    const { settings } = this.props;
-    const baseUrl = settings.useMockData ? null : settings.apiUrl;
-    getAccountList(baseUrl).then(value =>
+    const { settings, auth } = this.props;
+    const accessToken = settings.useMockData ? null : auth.userInfo.idToken;
+    getAccountList(accessToken).then(value =>
       this.setState({ loading: false, accountList: value })
     );
   };
@@ -75,8 +75,8 @@ class AccountListScreen extends React.Component {
   }
 }
 
-const mapStateToProps = ({ settings }) => {
-  return { settings };
+const mapStateToProps = ({ settings, auth }) => {
+  return { settings, auth };
 };
 
 export default connect(mapStateToProps)(AccountListScreen);
