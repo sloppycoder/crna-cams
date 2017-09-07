@@ -4,7 +4,7 @@ async function getAccountList(accessToken, userId = 'user1') {
     return require('./mock/account-list/user1.json');
   } else {
     // the URL is hosted by AWS API gateway
-    const url = `https://izvbvrhqh0.execute-api.us-west-2.amazonaws.com/stage/accounts?user=${userId}`;
+    const url = `https://api.vino9.net/cams/accounts?user=${userId}`;
     console.log('getting data from ', url);
     console.log('access token ', accessToken);
     let res = await fetch(url, {
