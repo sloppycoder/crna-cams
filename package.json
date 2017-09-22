@@ -10,7 +10,7 @@
     "eslint-config-react-native": "^1.6.0",
     "eslint-config-react-native-prettier": "^1.0.1",
     "husky": "^0.14.3",
-    "jest-expo": "~20.0.0",
+    "jest-expo": "~21.0.0",
     "lint-staged": "^4.0.2",
     "prettier": "^1.5.3",
     "react-native-debugger-open": "^0.3.12",
@@ -35,9 +35,9 @@
     "**/*.{js,jsx,json,scss}": ["prettier --single-quote --write", "git add"]
   },
   "dependencies": {
-    "expo": "^20.0.0",
+    "expo": "^21.0.0",
     "react": "16.0.0-alpha.12",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-20.0.0.tar.gz",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-21.0.2.tar.gz",
     "react-native-communications": "^2.2.1",
     "react-native-elements": "^0.15.0",
     "react-native-settings-list": "^1.6.1",
