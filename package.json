@@ -6,14 +6,14 @@
   "author": "Li Lin",
   "license": "UNLICENSED",
   "devDependencies": {
-    "eslint": "^4.3.0",
+    "eslint": "^4.10.0",
     "eslint-config-react-native": "^1.6.0",
     "eslint-config-react-native-prettier": "^1.0.1",
     "husky": "^0.14.3",
     "jest-expo": "~22.0.0",
     "lint-staged": "^4.0.2",
-    "prettier": "^1.5.3",
-    "react-native-debugger-open": "^0.3.12",
+    "prettier": "^1.7.0",
+    "react-native-debugger-open": "^0.3.15",
     "react-native-scripts": "^1.7.0",
     "react-test-renderer": "16.0.0-beta.5"
   },
